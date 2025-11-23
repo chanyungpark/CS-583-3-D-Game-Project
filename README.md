@@ -3,7 +3,8 @@
 ## Group Members
 - Chan Yung Park  
 - Isaac Angulo Gomez  
-- Ryan Renales  
+- Ryan Renales
+- Bryce Rambach
 
 ## Overview
 **Fire Station #33 3-D** is a third-person forest-fire rescue game.  
