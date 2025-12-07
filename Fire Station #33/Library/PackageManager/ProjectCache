@@ -6,7 +6,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639006691260000000
+      ticks: 639006719190000000
     m_Hash: 309256587
   m_LockFileStatus:
     m_FilePath: /Users/bryce/Documents/GitHub/CS-583-3-D-Game-Project/Fire Station
@@ -15,7 +15,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639006691260000000
+      ticks: 639006719190000000
     m_Hash: 3826871837
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
