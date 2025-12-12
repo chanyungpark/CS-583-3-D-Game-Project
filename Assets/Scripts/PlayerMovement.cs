@@ -3,68 +3,183 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Move")]
-    public float moveSpeed = 4f;           // walking speed
+    [Header("Movement")]
+    [Tooltip("Walking speed in m/s.")]
+    public float walkSpeed = 4f;
+    [Tooltip("Sprint speed in m/s (Left Shift).")]
+    public float sprintSpeed = 7f;
+    [Tooltip("How quickly we accelerate/decelerate towards target speed.")]
+    public float acceleration = 12f;
+
+    [Header("Rotation")]
+    [Tooltip("How quickly the character turns towards the move direction.")]
+    public float rotationSmoothTime = 0.1f;
 
     [Header("Jump / Gravity")]
-    public float jumpHeight = 1.5f;        // how high the jump is
-    public float gravity = -25f;           // stronger than -9.81 for CharacterController
-    public float groundedGravity = -4f;    // small downward force when grounded
+    [Tooltip("How high the player can jump (meters). Set to 0 to effectively disable jumping.")]
+    public float jumpHeight = 1.5f;
+    [Tooltip("Gravity strength. Keep negative.")]
+    public float gravity = -25f;
+    [Tooltip("Small downward force when grounded to keep us stuck to the ground.")]
+    public float groundedGravity = -2f;
 
+    [Header("Animator Settings")]
+    [Tooltip("Multiplier for animator playback speed while sprinting.")]
+    public float sprintAnimSpeedMultiplier = 1.2f;
+
+    [Header("References")]
+    [Tooltip("Camera the movement is relative to. If left empty, will use Camera.main.")]
+    public Transform cameraTransform;
+    [Tooltip("Animator on the player. If left empty, will auto-grab.")]
+    public Animator animator;
+
+    // Internal
     private CharacterController controller;
-    private Vector3 verticalVelocity;      // only Y is used
+
+    // Velocity
+    private Vector3 horizontalVelocity; // x/z
+    private float verticalVelocity;     // y only
+
+    // Smoothing
+    private float currentSpeed;
+    private float speedSmoothVelocity;
+    private float turnSmoothVelocity;
+
+    // State
+    private bool isSprinting;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+
+        if (cameraTransform == null && Camera.main != null)
+            cameraTransform = Camera.main.transform;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        HandleMovement();
-        HandleGravityAndJump();
+        float dt = Time.deltaTime;
+
+        HandleMovement(dt);
+        HandleGravityAndJump(dt);
+        ApplyFinalMove(dt);
+        UpdateAnimator(dt);
     }
 
-    private void HandleMovement()
+    // ──────────────────────────────────────────────
+    // Input + horizontal movement (no gravity here)
+    // ──────────────────────────────────────────────
+    private void HandleMovement(float dt)
     {
-        // WASD + Arrow keys (Unity default axes)
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right
-        float vertical   = Input.GetAxisRaw("Vertical");   // W/S or Up/Down
+        // Input: WASD / arrow keys
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputZ = Input.GetAxisRaw("Vertical");
+        Vector2 input = new Vector2(inputX, inputZ);
 
-        // input in local space (x = strafe, z = forward/back)
-        Vector3 inputDir = new Vector3(horizontal, 0f, vertical);
+        float inputMagnitude = Mathf.Clamp01(input.magnitude);
+        Vector2 inputDir = inputMagnitude > 0.01f ? input.normalized : Vector2.zero;
 
-        if (inputDir.sqrMagnitude > 1f)
-            inputDir.Normalize();
+        // Sprint only when actually moving
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && inputMagnitude > 0.01f;
 
-        // move relative to the player's facing direction
-        // (player's yaw is controlled by your mouse-look script)
-        Vector3 move = transform.TransformDirection(inputDir);
+        float targetSpeed = (isSprinting ? sprintSpeed : walkSpeed) * inputMagnitude;
 
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        // Smooth speed change
+        float smoothTime = targetSpeed > 0.1f ? (1f / acceleration) : 0.08f;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, smoothTime);
+
+        if (inputDir == Vector2.zero)
+        {
+            // No input → only slow down over time
+            horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, dt * acceleration);
+            return;
+        }
+
+        // Build camera-relative forward/right on XZ plane
+        Vector3 camForward = Vector3.forward;
+        Vector3 camRight = Vector3.right;
+
+        if (cameraTransform != null)
+        {
+            camForward = cameraTransform.forward;
+            camForward.y = 0f;
+            camForward.Normalize();
+
+            camRight = cameraTransform.right;
+            camRight.y = 0f;
+            camRight.Normalize();
+        }
+
+        // Desired move direction relative to camera
+        Vector3 moveDir = camForward * inputDir.y + camRight * inputDir.x;
+        moveDir.Normalize();
+
+        // Smooth rotation towards move direction
+        float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, rotationSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        horizontalVelocity = moveDir * currentSpeed;
     }
 
-    private void HandleGravityAndJump()
+    // ──────────────────────────────────────────────
+    // Gravity & jumping, vertical motion only
+    // ──────────────────────────────────────────────
+    private bool IsGrounded()
     {
-        bool isGrounded = controller.isGrounded;
+        return controller.isGrounded;
+    }
 
-        if (isGrounded && verticalVelocity.y < 0f)
+    private void HandleGravityAndJump(float dt)
+    {
+        bool grounded = IsGrounded();
+
+        if (grounded)
         {
-            // small downward force to keep you snapped to ground
-            verticalVelocity.y = groundedGravity;
-        }
+            if (verticalVelocity < 0f)
+                verticalVelocity = groundedGravity;
 
-        // Jump (Space by default in Unity: "Jump" input)
-        if (isGrounded && Input.GetButtonDown("Jump"))
+            // Jump (Space) — only if jumpHeight > 0, so you can "disable" jump from Inspector easily
+            if (jumpHeight > 0f && Input.GetButtonDown("Jump"))
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+        }
+        else
         {
-            // v = sqrt(h * -2 * g)
-            verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            verticalVelocity += gravity * dt;
         }
+    }
 
-        // apply gravity
-        verticalVelocity.y += gravity * Time.deltaTime;
+    // ──────────────────────────────────────────────
+    // Combine horizontal + vertical and move once
+    // ──────────────────────────────────────────────
+    private void ApplyFinalMove(float dt)
+    {
+        Vector3 verticalMove = Vector3.up * verticalVelocity;
+        Vector3 finalMove = horizontalVelocity + verticalMove;
 
-        // apply vertical motion
-        controller.Move(verticalVelocity * Time.deltaTime);
+        controller.Move(finalMove * dt);
+    }
+
+    // ──────────────────────────────────────────────
+    // Animator hook (for your Idle/Walk/Run/etc.)
+    // ──────────────────────────────────────────────
+    private void UpdateAnimator(float dt)
+    {
+        if (animator == null) return;
+
+        // Normalize speed to 0–1 based on sprintSpeed
+        float normalizedSpeed = Mathf.InverseLerp(0f, sprintSpeed, currentSpeed);
+        animator.SetFloat("Speed", normalizedSpeed, 0.1f, dt);
+
+        animator.SetBool("IsGrounded", IsGrounded());
+        animator.SetFloat("VerticalSpeed", verticalVelocity);
+
+        // Make animations play slightly faster while sprinting
+        animator.speed = isSprinting ? sprintAnimSpeedMultiplier : 1f;
     }
 }
