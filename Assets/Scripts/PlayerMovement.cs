@@ -176,8 +176,8 @@ public class PlayerMovement : MonoBehaviour
         float normalizedSpeed = Mathf.InverseLerp(0f, sprintSpeed, currentSpeed);
         animator.SetFloat("Speed", normalizedSpeed, 0.1f, dt);
 
-        animator.SetBool("IsGrounded", IsGrounded());
-        animator.SetFloat("VerticalSpeed", verticalVelocity);
+        //animator.SetBool("IsGrounded", IsGrounded());
+        //animator.SetFloat("VerticalSpeed", verticalVelocity);
 
         // Make animations play slightly faster while sprinting
         animator.speed = isSprinting ? sprintAnimSpeedMultiplier : 1f;
