@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputDir == Vector2.zero)
         {
-            // No input → only slow down over time
+            // No input → gently slow to a stop
             horizontalVelocity = Vector3.Lerp(horizontalVelocity, Vector3.zero, dt * acceleration);
             return;
         }
@@ -113,14 +113,34 @@ public class PlayerMovement : MonoBehaviour
             camRight.Normalize();
         }
 
-        // Desired move direction relative to camera
-        Vector3 moveDir = camForward * inputDir.y + camRight * inputDir.x;
-        moveDir.Normalize();
+        Vector3 moveDir;
 
-        // Smooth rotation towards move direction
-        float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, rotationSmoothTime);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        // 1) Pure backward: S only -> move backwards, don't rotate
+        if (inputDir.y < -0.01f && Mathf.Abs(inputDir.x) < 0.01f)
+        {
+            moveDir = -transform.forward;
+        }
+        // 2) Pure strafe (A/D only, no forward component): move sideways, don't rotate
+        else if (Mathf.Abs(inputDir.x) > 0.01f && inputDir.y <= 0.01f)
+        {
+            // Use camera right for strafe direction so A/D are camera-relative
+            moveDir = (inputDir.x > 0f ? camRight : -camRight);
+        }
+        // 3) Forward or forward-diagonal: rotate character to face movement
+        else
+        {
+            moveDir = camForward * inputDir.y + camRight * inputDir.x;
+            moveDir.Normalize();
+
+            float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(
+                transform.eulerAngles.y,
+                targetAngle,
+                ref turnSmoothVelocity,
+                rotationSmoothTime
+            );
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         horizontalVelocity = moveDir * currentSpeed;
     }
@@ -142,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
             if (verticalVelocity < 0f)
                 verticalVelocity = groundedGravity;
 
-            // Jump (Space) — only if jumpHeight > 0, so you can "disable" jump from Inspector easily
+            // Jump (Space) — only if jumpHeight > 0
             if (jumpHeight > 0f && Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -166,20 +186,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // ──────────────────────────────────────────────
-    // Animator hook (for your Idle/Walk/Run/etc.)
+    // Animator hook
     // ──────────────────────────────────────────────
     private void UpdateAnimator(float dt)
     {
         if (animator == null) return;
 
-        // Normalize speed to 0–1 based on sprintSpeed
         float normalizedSpeed = Mathf.InverseLerp(0f, sprintSpeed, currentSpeed);
         animator.SetFloat("Speed", normalizedSpeed, 0.1f, dt);
 
-        animator.SetBool("IsGrounded", IsGrounded());
-        animator.SetFloat("VerticalSpeed", verticalVelocity);
-
-        // Make animations play slightly faster while sprinting
         animator.speed = isSprinting ? sprintAnimSpeedMultiplier : 1f;
     }
 }
