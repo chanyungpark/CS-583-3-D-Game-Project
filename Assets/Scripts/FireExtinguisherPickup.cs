@@ -37,6 +37,7 @@ public class FireExtinguisherPickup : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             playerInventory.GiveExtinguisher();
+            FindObjectOfType<ExtinguisherSpray>().hasExtinguisher = true;
             if (pickupPromptUI != null)
                 pickupPromptUI.SetActive(false);
 
