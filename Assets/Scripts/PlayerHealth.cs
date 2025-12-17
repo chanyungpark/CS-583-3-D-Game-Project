@@ -42,9 +42,8 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Player died!");
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.PlayerDied();
-        }
+        // TEMP: reload scene on death
+        // Comment this out later and hook to proper game over UI.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

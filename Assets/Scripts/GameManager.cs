@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public int maxBurnedTrees = 10;
     public int burnedTrees = 0;
 
-    private bool gameOver = false;
 
     void Awake()
     {
@@ -29,26 +28,15 @@ public class GameManager : MonoBehaviour
 
         if(burnedTrees >= maxBurnedTrees)
         {
-            LoseGame("The forest was overwhelmed by fire...");
+            LoseGame();
         }
 
     }
 
-    public void PlayerDied()
+    private void LoseGame()
     {
-        LoseGame("You died.");
-    }
+        Debug.Log("GAME OVER: too many trees burned!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-    private void LoseGame(string reason)
-    {
-        if (gameOver) return;
-        gameOver = true;
-
-        Debug.Log("GAME OVER: " + reason);
-
-        if (GameOverUI.Instance != null)
-        {
-            GameOverUI.Instance.ShowGameOver(reason);
-        }
     }
 }
