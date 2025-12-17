@@ -1,0 +1,102 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
+public class PauseMenu : MonoBehaviour
+{
+    [Header("UI")]
+    public GameObject pauseMenuUI;
+    public Slider masterVolumeSlider;
+    public Toggle sfxMuteToggle;
+    public Toggle musicMuteToggle;
+
+    [Header("Audio")]
+    public AudioMixer audioMixer;
+
+    private bool isPaused = false;
+
+    void Start()
+    {
+        pauseMenuUI.SetActive(false);
+
+        // Load saved settings
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        sfxMuteToggle.isOn = PlayerPrefs.GetInt("SFXMuted", 0) == 1;
+        musicMuteToggle.isOn = PlayerPrefs.GetInt("MusicMuted", 0) == 1;
+
+        ApplyAudioSettings();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+                Resume();
+            else
+                Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        Debug.Log("Resume button pressed.");
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isPaused = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void GoToMenu()
+    {
+        Debug.Log("Menu button pressed.");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu"); // change if needed
+      }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quit button pressed.");
+        Application.Quit();
+    }
+
+    // ================= AUDIO =================
+
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", volume);
+    }
+
+    public void ToggleSFXMute(bool isMuted)
+    {
+        audioMixer.SetFloat("SFXVolume", isMuted ? -80f : 0f);
+        PlayerPrefs.SetInt("SFXMuted", isMuted ? 1 : 0);
+    }
+
+    public void ToggleMusicMute(bool isMuted)
+    {
+        audioMixer.SetFloat("MusicVolume", isMuted ? -80f : 0f);
+        PlayerPrefs.SetInt("MusicMuted", isMuted ? 1 : 0);
+    }
+
+    void ApplyAudioSettings()
+    {
+        SetMasterVolume(masterVolumeSlider.value);
+        ToggleSFXMute(sfxMuteToggle.isOn);
+        ToggleMusicMute(musicMuteToggle.isOn);
+    }
+}
