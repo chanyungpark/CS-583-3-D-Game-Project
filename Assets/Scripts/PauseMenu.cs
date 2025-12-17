@@ -15,6 +15,7 @@ public class PauseMenu : MonoBehaviour
     public AudioMixer audioMixer;
 
     private bool isPaused = false;
+    private float lastSFXVolume = 1f;
 
     void Start()
     {
@@ -41,7 +42,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resume button pressed.");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -62,14 +62,12 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMenu()
     {
-        Debug.Log("Menu button pressed.");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // change if needed
+        SceneManager.LoadScene("MainMenu"); 
       }
 
     public void QuitGame()
     {
-        Debug.Log("Quit button pressed.");
         Application.Quit();
     }
 
@@ -83,8 +81,21 @@ public class PauseMenu : MonoBehaviour
 
     public void ToggleSFXMute(bool isMuted)
     {
-        audioMixer.SetFloat("SFXVolume", isMuted ? -80f : 0f);
+        float volume = isMuted ? -80f : 0f;
+
+        audioMixer.SetFloat("SFXVolume", volume);
         PlayerPrefs.SetInt("SFXMuted", isMuted ? 1 : 0);
+
+        Debug.Log("SFX Muted: " + isMuted);
+
+        if (isMuted)
+        {
+            audioMixer.SetFloat("SFXVolume", -80f);
+        }
+        else
+        {
+            audioMixer.SetFloat("SFXVolume", Mathf.Log10(lastSFXVolume) * 20);
+        }
     }
 
     public void ToggleMusicMute(bool isMuted)

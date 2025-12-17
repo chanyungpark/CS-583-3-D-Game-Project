@@ -21638,6 +21638,9 @@ GameObject:
   - component: {fileID: 78427257}
   - component: {fileID: 78427256}
   - component: {fileID: 78427260}
+  - component: {fileID: 78427263}
+  - component: {fileID: 78427262}
+  - component: {fileID: 78427261}
   m_Layer: 5
   m_Name: CanvasMenu
   m_TagString: Untagged
@@ -21741,10 +21744,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1780217798}
-  masterVolumeSlider: {fileID: 0}
-  sfxMuteToggle: {fileID: 0}
-  musicMuteToggle: {fileID: 0}
-  audioMixer: {fileID: 0}
+  masterVolumeSlider: {fileID: 1614908629}
+  sfxMuteToggle: {fileID: 478006695}
+  musicMuteToggle: {fileID: 506584671}
+  audioMixer: {fileID: 24100000, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
+--- !u!225 &78427261
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78427255}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
+--- !u!114 &78427262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78427255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &78427263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78427255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!1 &78524901
 GameObject:
   m_ObjectHideFlags: 0
@@ -126202,7 +126252,7 @@ AudioSource:
   m_GameObject: {fileID: 435182847}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9e1726e7af1904dbc815eec973de61d0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.196
@@ -137378,7 +137428,7 @@ GameObject:
   - component: {fileID: 478006694}
   - component: {fileID: 478006695}
   m_Layer: 5
-  m_Name: GameMute
+  m_Name: SFXMute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137451,7 +137501,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 78427260}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ToggleSFXMute
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &478110795
 GameObject:
@@ -148674,7 +148736,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 78427260}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: ToggleMusicMute
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1001 &507136534
 PrefabInstance:
@@ -239259,7 +239333,7 @@ AudioSource:
   m_GameObject: {fileID: 790783328}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 2bd6aa3a1b54e4fdf972ec9fcc997cf2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -244248,6 +244322,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7782203324765683431, guid: 86a6118f28036084dbef65937d7e17d1, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -489434,7 +489512,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 78427260}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: SetMasterVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1614988109
 GameObject:
   m_ObjectHideFlags: 0

@@ -9778,10 +9778,9 @@ MonoBehaviour:
   spreadInterval: 3
   spreadRadius: 4
   maxChildren: 5
-  spreadThreshold: 0.7
   groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!1 &2527825875486943727
 GameObject:
   m_ObjectHideFlags: 0
@@ -14628,7 +14627,7 @@ AudioSource:
   m_GameObject: {fileID: 2527825875486943727}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 447e97f44e7d0fd4eb6ddec82c319992, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
