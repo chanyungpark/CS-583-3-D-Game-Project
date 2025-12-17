@@ -29,6 +29,9 @@ public class ExtinguisherSpray : MonoBehaviour
     public float pressureRecoveryRate = 20f;
 
     [Header("References")]
+    [Tooltip("Audio for extinguisher spray.")]
+    public ExtinguisherAudio extinguisherAudio;
+
     [Tooltip("Particle system for the extinguisher spray effect.")]
     public ParticleSystem sprayVFX;
 
@@ -67,6 +70,11 @@ public class ExtinguisherSpray : MonoBehaviour
             {
                 sprayVFX.Stop();
             }
+            if (extinguisherAudio != null)
+            {
+                extinguisherAudio.StopSpray();
+            }
+
             return;
         }
 
@@ -115,6 +123,11 @@ public class ExtinguisherSpray : MonoBehaviour
         {
             sprayVFX.Play();
         }
+
+        if (extinguisherAudio != null)
+        {
+            extinguisherAudio.StartSpray();
+        }
     }
 
     private void HandleBurst(float dt)
@@ -139,6 +152,11 @@ public class ExtinguisherSpray : MonoBehaviour
             {
                 sprayVFX.Stop();
             }
+            if (extinguisherAudio != null)
+            {
+                extinguisherAudio.StopSpray();
+            }
+
 
             return;
         }
