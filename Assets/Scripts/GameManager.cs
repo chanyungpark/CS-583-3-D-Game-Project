@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     private bool gameOver = false;
 
-
     void Awake()
     {
         if(Instance != null && Instance != this)
