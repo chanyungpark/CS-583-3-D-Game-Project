@@ -8,6 +8,8 @@ public class FireExtinguisherPickup : MonoBehaviour
     private bool playerInRange;
     private PlayerInventory playerInventory;
 
+    public AudioSource pickupAudio;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -36,13 +38,17 @@ public class FireExtinguisherPickup : MonoBehaviour
         // E to pick up
         if (Input.GetKeyDown(KeyCode.E))
         {
+            pickupAudio.Play();
+
             playerInventory.GiveExtinguisher();
             FindObjectOfType<ExtinguisherSpray>().hasExtinguisher = true;
             if (pickupPromptUI != null)
                 pickupPromptUI.SetActive(false);
 
             // Hide the extinguisher in the world
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            Destroy(gameObject, pickupAudio.clip.length);
+
         }
     }
 }
