@@ -44,6 +44,9 @@ public class PlayerHealth : MonoBehaviour
 
         // TEMP: reload scene on death
         // Comment this out later and hook to proper game over UI.
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.PlayerDied();
+        }
     }
 }
