@@ -304549,7 +304549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9cd515ea6a420eb7aa23290e325e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPromptUI: {fileID: 0}
+  pickupPromptUI: {fileID: 857062340}
 --- !u!1 &999877701
 GameObject:
   m_ObjectHideFlags: 0
