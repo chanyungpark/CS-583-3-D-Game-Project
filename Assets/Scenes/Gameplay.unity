@@ -367408,6 +367408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 2082447907}
+  finalScoreText: {fileID: 0}
   reasonText: {fileID: 1312429716}
 --- !u!114 &1205350431
 MonoBehaviour:
@@ -639876,7 +639877,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: 58737df6d40bb7442ae753b50a911075, type: 3}
       propertyPath: m_Name
-      value: fire extinguisher
+      value: Fire Extinguisher
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 58737df6d40bb7442ae753b50a911075, type: 3}
       propertyPath: m_LocalScale.x
