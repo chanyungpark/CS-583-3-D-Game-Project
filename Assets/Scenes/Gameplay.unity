@@ -10181,6 +10181,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2147454592}
     m_Modifications:
+    - target: {fileID: -6517094217701593586, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
     - target: {fileID: 4132312772176831909, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
       propertyPath: m_Name
       value: Rio
@@ -163791,6 +163795,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: 3ebbc93f25db810498e675f1991d14f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ebbc93f25db810498e675f1991d14f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -273910,7 +273918,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "GAME OVER \u2639"
+  m_text: GAME OVER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
   m_sharedMaterial: {fileID: -5660775149628104760, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
@@ -304877,7 +304885,7 @@ AudioSource:
   m_GameObject: {fileID: 999732240}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -7089825990848223876, guid: 3c565f59da5c68543b65a7b70d524bd3, type: 2}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 8300000, guid: cca8c377fb48cfd45bc0b9616ef12015, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
@@ -338931,7 +338939,7 @@ AudioSource:
   m_GameObject: {fileID: 1117644546}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -7089825990848223876, guid: 3c565f59da5c68543b65a7b70d524bd3, type: 2}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 8300000, guid: aa579de57fb69ee4da8d1f373785c749, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
@@ -367408,6 +367416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 2082447907}
+  finalScoreText: {fileID: 0}
   reasonText: {fileID: 1312429716}
 --- !u!114 &1205350431
 MonoBehaviour:
