@@ -48,5 +48,5 @@ MonoBehaviour:
   initialFires: 10
   groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   groundCollider: {fileID: 0}
