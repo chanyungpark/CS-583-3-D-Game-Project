@@ -7,6 +7,7 @@ public class GameOverUI : MonoBehaviour
     public static GameOverUI Instance;
 
     public GameObject root;
+    public TMP_Text finalScoreText;
     public TMP_Text reasonText;
 
     private void Awake()
@@ -26,7 +27,15 @@ public class GameOverUI : MonoBehaviour
         root.SetActive(true);
         reasonText.text = reason;
 
-        Time.timeScale = 0f;
+        // Fetch stats from ScoreManager
+        int fires = ScoreManager.Instance != null ? ScoreManager.Instance.firesExtinguished : 0;
+        int hikers = ScoreManager.Instance != null ? ScoreManager.Instance.hikersSaved : 0;
+
+        // Simple score calculation
+        int score = (hikers * 100) + (fires * 50);
+
+        if (finalScoreText != null)
+            finalScoreText.text = $"SCORE: {score}";
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
