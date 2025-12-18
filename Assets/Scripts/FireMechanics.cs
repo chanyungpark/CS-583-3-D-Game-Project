@@ -67,6 +67,7 @@ public class FireMechanics : MonoBehaviour
 
         if(Physics.Raycast(spawnPos, Vector3.down, out RaycastHit hit, 10f, groundMask))
         {
+            GameManager.Instance.firesInMap++;
             Instantiate(firePrefab, hit.point, Quaternion.identity);
             spawnedChildren++;
         }

@@ -64,11 +64,19 @@ public class FireController : MonoBehaviour
             fireVFX.Stop();
         }
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.FirePutOut();
+        }
+
         Collider col = GetComponent<Collider>();
         if (col != null)
             col.enabled = false;
 
         if (destroyOnExtinguish)
-            Destroy(gameObject, 1f); 
+            {
+                
+                Destroy(gameObject, 1f); 
+            }
     }
 }
