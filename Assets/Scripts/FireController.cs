@@ -37,6 +37,10 @@ public class FireController : MonoBehaviour
 
     private void Extinguish()
     {
+        // If fire is extinguished add it to the score
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.AddFireExtinguished();
+
         // stop the fire particles
         if (fireVFX != null)
         {
