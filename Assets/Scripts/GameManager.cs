@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     public bool IsPaused => isPaused;
     public bool IsGameOver => gameOver;
 
+    [Header("Hiker Stats")]
+    public int savedHikers = 0;
+    public int totalHikersInMap = 0; 
+    public int totalHikersLost = 0;  
+    public int hickersSpawned;   
+
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -53,7 +59,16 @@ public class GameManager : MonoBehaviour
         {
             LoseGame("The forest was overwhelmed by fire...");
         }
+    }
 
+    public void HikerLoss()
+    {
+        totalHikersLost++;
+ 
+        if (totalHikersLost >= 2) 
+        {
+            LoseGame("Too many Hikers lost to the fire.");
+        }
     }
 
     public void PlayerDied()
@@ -75,5 +90,32 @@ public class GameManager : MonoBehaviour
         {
             GameOverUI.Instance.ShowGameOver(reason);
         }
+    }
+
+    public void HikerSaved() 
+    {
+        savedHikers++;
+        Debug.Log($"Hiker saved! Total: {savedHikers}/{totalHikersInMap}");
+
+        if (totalHikersInMap > 0 && savedHikers >= (totalHikersInMap - 1))
+        {
+            WinGame();
+        }
+    }
+
+    private void WinGame()
+    {
+        if (gameOver) return;
+    gameOver = true;
+
+    Time.timeScale = 0f;
+    ShowHUD(false);
+
+    Debug.Log("YOU WIN! Most hikers rescued.");
+    
+    if (GameOverUI.Instance != null)
+    {
+        GameOverUI.Instance.ShowGameOver("YOU HAVE SAVED ENOUGH HIKERS! THE FORREST IS SAFE.");
+    }
     }
 }

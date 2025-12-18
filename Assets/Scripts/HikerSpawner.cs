@@ -5,6 +5,7 @@ public class HikerSpawner : MonoBehaviour
     [Header("Prefabs")]
     public GameObject hikerPrefab;
     public int hikersToSpawn = 6;
+    public int spawnedhikers = 0;
 
     [Header("Spawn Zones")]
     public BoxCollider[] spawnZones;
@@ -21,6 +22,13 @@ public class HikerSpawner : MonoBehaviour
         {
             SpawnHiker();
         }
+
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.hickersSpawned = spawnedhikers;
+            GameManager.Instance.totalHikersInMap = spawnedhikers;
+        }
+
     }
 
     void SpawnHiker()
@@ -45,6 +53,7 @@ public class HikerSpawner : MonoBehaviour
             if(Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit, 100f, groundMask))
             {
                 Instantiate(hikerPrefab, hit.point, Quaternion.identity);
+                spawnedhikers++;
                 return;
             }
         }

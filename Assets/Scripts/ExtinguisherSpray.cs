@@ -14,6 +14,7 @@ public class ExtinguisherSpray : MonoBehaviour
 
     [Header("References")]
     public ParticleSystem sprayVFX;
+    public AudioSource sprayAudioSource;
     public Transform nozzle;
     public LayerMask fireMask;
 
@@ -27,6 +28,9 @@ public class ExtinguisherSpray : MonoBehaviour
 
         if (sprayVFX != null)
             sprayVFX.Stop();
+
+        if (sprayAudioSource != null)
+            sprayAudioSource.loop = true;
     }
 
     private void Update()
@@ -90,14 +94,35 @@ public class ExtinguisherSpray : MonoBehaviour
     private void StartSpray()
     {
         if (sprayVFX != null && !sprayVFX.isPlaying)
-            Debug.Log("Spray VFX Play()");
+        {
             sprayVFX.Play();
+        }
+
+        if (sprayAudioSource != null)
+        {
+            if (!sprayAudioSource.gameObject.activeInHierarchy)
+                sprayAudioSource.gameObject.SetActive(true);
+                
+            if (!sprayAudioSource.enabled)
+                sprayAudioSource.enabled = true;
+
+            if (!sprayAudioSource.isPlaying)
+            {
+                Debug.Log("Spray Audio");
+                sprayAudioSource.Play();
+            }
+        }
     }
 
     private void StopSpray()
     {
         if (sprayVFX != null && sprayVFX.isPlaying)
             sprayVFX.Stop();
+        
+        if (sprayAudioSource != null && sprayAudioSource.isPlaying)
+        {
+            sprayAudioSource.Stop();
+        }
     }
 
     private void HandlePressureRecovery(float dt)

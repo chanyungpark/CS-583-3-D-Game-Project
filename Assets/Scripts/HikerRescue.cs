@@ -217,6 +217,11 @@ public class HikerRescue : MonoBehaviour
             Debug.Log("Hiker saved! Total: " + ScoreManager.Instance.hikersSaved);
         }
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.HikerSaved();
+        }
+
         if (activeHiker == this)
         {
             activeHiker = null;
