@@ -361495,7 +361495,7 @@ PrefabInstance:
       objectReference: {fileID: 379676792}
     - target: {fileID: 3636017240202324906, guid: 0f7fb161e792613438f1104b1a4b2be6, type: 3}
       propertyPath: spawnZones.Array.size
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3636017240202324906, guid: 0f7fb161e792613438f1104b1a4b2be6, type: 3}
       propertyPath: spawnZones.Array.data[0]
