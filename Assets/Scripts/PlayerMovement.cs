@@ -169,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
             if (jumpHeight > 0f && Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                animator.SetTrigger("Jump");
             }
         }
         else
@@ -199,5 +200,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", normalizedSpeed, 0.1f, dt);
 
         animator.speed = isSprinting ? sprintAnimSpeedMultiplier : 1f;
+        animator.SetBool("isGrounded", controller.isGrounded);
     }
 }
