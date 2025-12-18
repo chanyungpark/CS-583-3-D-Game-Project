@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public int totalHikersLost = 0;  
     public int hickersSpawned;   
 
+    [Header("Fire Stats")]
+    public int firesInMap;
+
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -33,6 +36,18 @@ public class GameManager : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void FirePutOut()
+    {
+        firesInMap--;
+
+        Debug.Log("Fire put out! Remaining: " + firesInMap);
+
+        if (firesInMap <= 0)
+        {
+            WinGame("YOU HAVE PUT OUT ALL THE FIRES! THE FOREST IS SAFE.");
+        }
     }
 
     public void ShowHUD(bool show)
@@ -99,23 +114,29 @@ public class GameManager : MonoBehaviour
 
         if (totalHikersInMap > 0 && savedHikers >= (totalHikersInMap - 1))
         {
-            WinGame();
+            WinGame("YOU HAVE SAVED ENOUGH HIKERS! THE FORREST IS SAFE.");
         }
     }
 
-    private void WinGame()
+    private void WinGame(string reason)
     {
         if (gameOver) return;
-    gameOver = true;
+        gameOver = true;
 
-    Time.timeScale = 0f;
-    ShowHUD(false);
+        Time.timeScale = 0f;
+        ShowHUD(false);
 
-    Debug.Log("YOU WIN! Most hikers rescued.");
-    
-    if (GameOverUI.Instance != null)
-    {
-        GameOverUI.Instance.ShowGameOver("YOU HAVE SAVED ENOUGH HIKERS! THE FORREST IS SAFE.");
+        if (GameOverUI.Instance != null)
+        {
+            GameOverUI.Instance.ShowGameOver(reason);
+        }
     }
+
+    private void Start()
+    {
+        FireController[] allFires = Object.FindObjectsByType<FireController>(FindObjectsSortMode.None);
+        firesInMap = allFires.Length;
+        
+        Debug.Log("Total fires to extinguish: " + firesInMap);
     }
 }

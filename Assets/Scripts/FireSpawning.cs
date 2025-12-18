@@ -32,6 +32,7 @@ public class FireSpawning : MonoBehaviour
 
         if (Physics.Raycast(randomPos, Vector3.down, out RaycastHit hit, 100f, groundMask))
         {
+            GameManager.Instance.firesInMap++;
             Instantiate(firePrefab, hit.point, Quaternion.identity);
         }
     }

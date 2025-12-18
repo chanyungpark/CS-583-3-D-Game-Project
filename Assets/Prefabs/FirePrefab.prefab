@@ -9775,7 +9775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minScale: 0.2
   maxScale: 1.5
-  growthTime: 20
+  growthTime: 30
   firePrefab: {fileID: 955620711705089167}
   spreadInterval: 3
   spreadRadius: 4

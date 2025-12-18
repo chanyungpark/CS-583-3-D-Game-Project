@@ -244923,6 +244923,10 @@ PrefabInstance:
       propertyPath: minScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2193655677223222295, guid: 86a6118f28036084dbef65937d7e17d1, type: 3}
+      propertyPath: growthTime
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4809354101947880491, guid: 86a6118f28036084dbef65937d7e17d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9841194
