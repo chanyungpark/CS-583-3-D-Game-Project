@@ -211,6 +211,12 @@ public class HikerRescue : MonoBehaviour
     {
         isSaved = true;
 
+        if (GameManager.Instance != null)
+        {
+            ScoreManager.Instance.AddHikerSaved();
+            Debug.Log("Hiker saved! Total: " + ScoreManager.Instance.hikersSaved);
+        }
+
         if (activeHiker == this)
         {
             activeHiker = null;
