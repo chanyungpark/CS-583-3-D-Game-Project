@@ -9699,7 +9699,9 @@ GameObject:
   - component: {fileID: 622069202988298579}
   - component: {fileID: 6723197084591457582}
   - component: {fileID: 2193655677223222295}
-  m_Layer: 0
+  - component: {fileID: -3974866961746790660}
+  - component: {fileID: -4102293710011163194}
+  m_Layer: 3
   m_Name: FirePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9781,6 +9783,42 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &-3974866961746790660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955620711705089167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d75bffe47c24590b778a115a7a4719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  destroyOnExtinguish: 1
+  fireVFX: {fileID: 0}
+--- !u!135 &-4102293710011163194
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955620711705089167}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2527825875486943727
 GameObject:
   m_ObjectHideFlags: 0
