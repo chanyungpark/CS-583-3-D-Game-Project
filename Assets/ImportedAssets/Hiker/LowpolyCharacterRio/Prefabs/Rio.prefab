@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 280405593421270675}
   - component: {fileID: -809239396032948795}
   - component: {fileID: -6028742374399804455}
+  - component: {fileID: 2827915369570539203}
   m_Layer: 0
   m_Name: Rio
   m_TagString: Untagged
@@ -45,7 +46,7 @@ AudioSource:
   m_GameObject: {fileID: 4132312772176831909}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3753709528864162749, guid: 4485cce5416e848c39e1bf0944c4191d, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -186,6 +187,27 @@ MonoBehaviour:
   rescueUIRoot: {fileID: 0}
   progressBarImage: {fileID: 0}
   worldOffset: {x: 0, y: 2, z: 0}
+--- !u!95 &2827915369570539203
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132312772176831909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 24fc2c3e62c52bf4e9e63fd980b8e85d, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0d3fa4bc626d3419fb4e3a93fca63f56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8776609558996467893
 PrefabInstance:
   m_ObjectHideFlags: 0
