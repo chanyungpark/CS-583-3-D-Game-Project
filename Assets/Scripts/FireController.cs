@@ -57,6 +57,8 @@ public class FireController : MonoBehaviour
 
     private void Extinguish()
     {
+        ScoreManager.Instance?.AddFireExtinguished();
+
         if (fireVFX != null)
         {
             fireVFX.Stop();
