@@ -211,6 +211,8 @@ public class HikerRescue : MonoBehaviour
     {
         isSaved = true;
 
+        GetComponent<HikerAudio>().PlayRescued();
+
         if (GameManager.Instance != null)
         {
             ScoreManager.Instance.AddHikerSaved();
@@ -238,6 +240,11 @@ public class HikerRescue : MonoBehaviour
             }
         }
 
+        Invoke(nameof(DisableHiker), 2f);
+    }
+
+    private void DisableHiker()
+    {
         gameObject.SetActive(false);
     }
 }
