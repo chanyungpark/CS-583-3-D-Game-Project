@@ -9775,14 +9775,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minScale: 0.2
   maxScale: 1.5
-  growthTime: 30
+  growthTime: 20
   firePrefab: {fileID: 955620711705089167}
   spreadInterval: 3
   spreadRadius: 4
   maxChildren: 5
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &-3974866961746790660
 MonoBehaviour:
   m_ObjectHideFlags: 0
