@@ -12,6 +12,11 @@ public class FireExtinguisherPickup : MonoBehaviour
     private bool playerInRange;
     private PlayerInventory playerInventory;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip equipClip;
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -64,12 +69,25 @@ public class FireExtinguisherPickup : MonoBehaviour
             spray.hasExtinguisher = true;
         }
 
-        if(pickupPromptUI != null)
+        if (audioSource != null && equipClip != null)
+        {
+            audioSource.PlayOneShot(equipClip);
+        }
+
+
+        if (pickupPromptUI != null)
         {
             pickupPromptUI.SetActive(false);
         }
 
-        gameObject.SetActive(false);
+        Invoke(nameof(DisablePickup), 0.15f);
+
 
     }
+
+    private void DisablePickup()
+    {
+        gameObject.SetActive(false);
+    }
+
 }

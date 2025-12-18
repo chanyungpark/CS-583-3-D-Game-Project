@@ -304571,6 +304571,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupPromptUI: {fileID: 857062340}
   extinguisherInHands: {fileID: 1487016594}
+  audioSource: {fileID: 999732252}
+  equipClip: {fileID: 8300000, guid: cca8c377fb48cfd45bc0b9616ef12015, type: 3}
 --- !u!82 &999732252
 AudioSource:
   m_ObjectHideFlags: 0
