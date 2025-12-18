@@ -27,15 +27,11 @@ public class GameOverUI : MonoBehaviour
         root.SetActive(true);
         reasonText.text = reason;
 
-        // Fetch stats from ScoreManager
-        int fires = ScoreManager.Instance != null ? ScoreManager.Instance.firesExtinguished : 0;
-        int hikers = ScoreManager.Instance != null ? ScoreManager.Instance.hikersSaved : 0;
-
-        // Simple score calculation
-        int score = (hikers * 100) + (fires * 50);
-
-        if (finalScoreText != null)
-            finalScoreText.text = $"SCORE: {score}";
+        if (ScoreManager.Instance != null && finalScoreText != null)
+        {
+            int finalScore = ScoreManager.Instance.GetFinalScore();
+            finalScoreText.text = $"SCORE: {finalScore}";
+        }
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

@@ -16,6 +16,8 @@ public class ScoreManager : MonoBehaviour
 
     private float elapsedTime;
 
+    public float ElapsedTime => elapsedTime;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -61,5 +63,13 @@ public class ScoreManager : MonoBehaviour
     public void AddFireExtinguished()
     {
         firesExtinguished++;
+    }
+
+    public int GetFinalScore()
+    {
+        int hikerScore = hikersSaved * 100;
+        int fireScore = firesExtinguished * 50;
+
+        return hikerScore + fireScore;
     }
 }
