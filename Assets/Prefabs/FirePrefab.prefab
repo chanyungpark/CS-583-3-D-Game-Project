@@ -9701,7 +9701,7 @@ GameObject:
   - component: {fileID: 2193655677223222295}
   - component: {fileID: -3974866961746790660}
   - component: {fileID: -4102293710011163194}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: FirePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
