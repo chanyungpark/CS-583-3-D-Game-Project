@@ -109406,6 +109406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.048344
@@ -153368,6 +153372,10 @@ PrefabInstance:
     - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_Name
       value: HikerZone_ (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
@@ -245088,6 +245096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.5717125
@@ -287837,6 +287849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: 45.590393
@@ -300137,6 +300153,10 @@ PrefabInstance:
     - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_Name
       value: HikerZone_ (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
@@ -339862,6 +339882,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2786903
@@ -361917,6 +361941,10 @@ PrefabInstance:
     - target: {fileID: 2853799998108400349, guid: 0f7fb161e792613438f1104b1a4b2be6, type: 3}
       propertyPath: m_Name
       value: Hikers
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636017240202324906, guid: 0f7fb161e792613438f1104b1a4b2be6, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 3636017240202324906, guid: 0f7fb161e792613438f1104b1a4b2be6, type: 3}
       propertyPath: spawnZones.Array.size
@@ -425104,6 +425132,10 @@ PrefabInstance:
     - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_Name
       value: HikerZone_
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
@@ -498794,6 +498826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: -47.611305
@@ -512495,6 +512531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HikerZone_ (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.561504
@@ -517853,6 +517893,10 @@ PrefabInstance:
     - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_Name
       value: HikerZone_ (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
@@ -630325,6 +630369,10 @@ PrefabInstance:
     - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_Name
       value: HikerZone_ (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441182014112850060, guid: ae297af4168142c499fbbc8805607468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1764958692484764794, guid: ae297af4168142c499fbbc8805607468, type: 3}
       propertyPath: m_LocalPosition.x
