@@ -26,8 +26,6 @@ public class GameOverUI : MonoBehaviour
         root.SetActive(true);
         reasonText.text = reason;
 
-        Time.timeScale = 0f;
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

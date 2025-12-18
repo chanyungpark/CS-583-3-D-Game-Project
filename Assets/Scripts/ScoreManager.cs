@@ -29,6 +29,10 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance == null) return;
+        if (GameManager.Instance.IsPaused || GameManager.Instance.IsGameOver)
+            return;
+
         UpdateTime();
         UpdateUI();
     }

@@ -3,12 +3,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("HUD")]
+    [SerializeField] private GameObject hudCanvas;
+
     public static GameManager Instance{get; private set;}
 
     public int maxBurnedTrees = 10;
     public int burnedTrees = 0;
 
+    private bool isPaused = false;
     private bool gameOver = false;
+
+    public bool IsPaused => isPaused;
+    public bool IsGameOver => gameOver;
 
     void Awake()
     {
@@ -20,6 +27,21 @@ public class GameManager : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void ShowHUD(bool show)
+    {
+        if (hudCanvas != null)
+            hudCanvas.SetActive(show);
+    }
+
+    public void SetPaused(bool paused)
+    {
+        if (gameOver) return;
+
+        isPaused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+        ShowHUD(!paused);
     }
 
     public void TreeBurned()
@@ -43,6 +65,9 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
         gameOver = true;
+
+        Time.timeScale = 0f;
+        ShowHUD(false);
 
         Debug.Log("GAME OVER: " + reason);
 
