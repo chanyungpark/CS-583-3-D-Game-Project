@@ -5,11 +5,12 @@ public class FireExtinguisherPickup : MonoBehaviour
     [Tooltip("Optional prompt shown when player is in range (e.g. 'Press E to pick up').")]
     public GameObject pickupPromptUI;
 
+    [Header("References")]
+    public GameObject extinguisherInHands;
+
+    private bool pickedUp = false;
     private bool playerInRange;
     private PlayerInventory playerInventory;
-
-    public AudioSource pickupAudio;
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +20,7 @@ public class FireExtinguisherPickup : MonoBehaviour
         if (playerInventory == null) return;
 
         playerInRange = true;
+
         if (pickupPromptUI != null)
             pickupPromptUI.SetActive(true);
     }
@@ -28,6 +30,7 @@ public class FireExtinguisherPickup : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         playerInRange = false;
+
         if (pickupPromptUI != null)
             pickupPromptUI.SetActive(false);
     }
@@ -39,17 +42,34 @@ public class FireExtinguisherPickup : MonoBehaviour
         // E to pick up
         if (Input.GetKeyDown(KeyCode.E))
         {
-            pickupAudio.Play();
-
-
-            playerInventory.GiveExtinguisher();
-            FindObjectOfType<ExtinguisherSpray>().hasExtinguisher = true;
-            if (pickupPromptUI != null)
-                pickupPromptUI.SetActive(false);
-
-            // Hide the extinguisher in the world
-            Destroy(gameObject, pickupAudio.clip.length);
-
+            PickUp();
         }
+    }
+
+    private void PickUp()
+    {
+        pickedUp = true;
+
+        playerInventory.GiveExtinguisher();
+
+        if(extinguisherInHands != null)
+        {
+            extinguisherInHands.SetActive(true);
+        }
+
+        ExtinguisherSpray spray = extinguisherInHands.GetComponent<ExtinguisherSpray>();
+
+        if(spray != null)
+        {
+            spray.hasExtinguisher = true;
+        }
+
+        if(pickupPromptUI != null)
+        {
+            pickupPromptUI.SetActive(false);
+        }
+
+        gameObject.SetActive(false);
+
     }
 }
